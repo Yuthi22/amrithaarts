@@ -123,21 +123,8 @@
       <section id="home" class="hero" aria-labelledby="hero-title">
         <!-- Background slideshow. Add another slide by copying a <div class="hero__slide"> block. -->
         <div class="hero__slides">
-          <!-- Slide 1: stage (shown first) -->
+          <!-- Slide 1: procession (shown first) -->
           <div class="hero__slide is-active">
-            <img
-              class="hero__cover"
-              src="assets/images/hero-stage.webp"
-              alt="A traditional dancer in an ornate gold headdress in front of a gold circle, with dance students lined up behind"
-              width="1672"
-              height="941"
-              fetchpriority="high"
-            />
-            <div class="hero__veil hero__veil--stage" aria-hidden="true"></div>
-          </div>
-
-          <!-- Slide 2: procession -->
-          <div class="hero__slide" aria-hidden="true">
             <div class="hero__sky" aria-hidden="true"></div>
             <div class="hero__photo">
               <img
@@ -145,12 +132,25 @@
                 alt="Amritha School of Dance students in traditional Sri Lankan costume walking together in procession"
                 width="1451"
                 height="1084"
-                fetchpriority="low"
+                fetchpriority="high"
               />
             </div>
             <div class="hero__veil" aria-hidden="true"></div>
             <img class="decor hero__leaf hero__leaf--left" src="assets/images/decor/leaf-branch-small.svg" alt="" />
             <img class="decor hero__leaf hero__leaf--right" src="assets/images/decor/leaf-branch-small.svg" alt="" />
+          </div>
+
+          <!-- Slide 2: stage -->
+          <div class="hero__slide" aria-hidden="true">
+            <img
+              class="hero__cover"
+              src="assets/images/hero-stage.webp"
+              alt="A traditional dancer in an ornate gold headdress in front of a gold circle, with dance students lined up behind"
+              width="1672"
+              height="941"
+              fetchpriority="low"
+            />
+            <div class="hero__veil hero__veil--stage" aria-hidden="true"></div>
           </div>
         </div>
 
