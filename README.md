@@ -37,9 +37,9 @@ already installed on this PC:
 - **Gallery photos** — add/remove items in the "Full gallery" popup near the bottom of `index.html`;
   the photo viewer picks them up automatically.
 - **Hero slideshow** — the slides are in the `hero__slides` block at the top of `index.html`
-  (slide 1: procession, slide 2: `hero-stage.webp`). Images change every 4 seconds, and also when
+  (slide 1: `hero-stage.webp`, slide 2: procession). Images change every 8 seconds, and also when
   the mouse moves onto the hero (swipe on phones). To add a slide, copy a `<div class="hero__slide">`
-  block. Change the timing with `HERO_INTERVAL` at the top of `assets/js/main.js` (4000 = 4 seconds).
+  block. Change the timing with `HERO_INTERVAL` at the top of `assets/js/main.js` (8000 = 8 seconds).
 - **Colours** — the `:root` block near the top of `assets/css/style.css`.
 
 Still cut out of the `amritha.png` mockup: the Arts card photo (`journey-arts.webp`). Replace it with

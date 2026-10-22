@@ -13,8 +13,8 @@
   /** Paste the student LMS address here. While empty, "Connect LMS" shows a "coming soon" notice. */
   var LMS_URL = ''
 
-  /** How long each hero image stays on screen, in milliseconds (4000 = 4 seconds). */
-  var HERO_INTERVAL = 4000
+  /** How long each hero image stays on screen, in milliseconds (8000 = 8 seconds). */
+  var HERO_INTERVAL = 8000
 
   /** Text shown in the "View Classes" popup. */
   var CLASSES = {
