@@ -536,8 +536,8 @@ footer[id] {
 }
 
 .brand__text strong {
-  font-family: var(--font-sans);
-  font-weight: 600;
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: 600; /* semi-bold (Arial shows its Bold weight, as it has no semi-bold) */
   font-size: 1.3rem;
   letter-spacing: 0.02em;
 }
