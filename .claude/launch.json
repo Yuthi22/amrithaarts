@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "amritha-static",
+      "runtimeExecutable": "C:\\Program Files\\Java\\jdk-24\\bin\\jwebserver.exe",
+      "runtimeArgs": ["-d", "C:\\Amritha", "-b", "127.0.0.1", "-p", "5173"],
+      "port": 5173
+    }
+  ]
+}

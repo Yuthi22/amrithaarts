@@ -1,0 +1,41 @@
+.lms-modal {
+  width: min(540px, calc(100vw - 32px));
+}
+
+.lms-modal__inner {
+  padding: clamp(32px, 6vw, 48px) clamp(20px, 5vw, 44px);
+  text-align: center;
+}
+
+.lms-modal__lotus {
+  width: 52px;
+  margin-inline: auto;
+  color: var(--gold-500);
+}
+
+.lms-modal h2 {
+  margin: 12px 0 10px;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 5vw, 2.3rem);
+  line-height: 1.1;
+  color: var(--brown-900);
+}
+
+.lms-modal p {
+  max-width: 30em;
+  margin: 0 auto 26px;
+  color: var(--ink-soft);
+}
+
+.lms-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.lms-modal__actions .btn-outline {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+}

@@ -1,0 +1,14 @@
+# Downloaded libraries and build output for the React backup (recreate with npm install / npm run build)
+node_modules/
+react-version/dist/
+
+# Local tool settings
+.claude/settings.local.json
+
+# Separate copy of the GitHub repo (this folder is now the repo itself; safe to delete)
+amrithaarts/
+
+# Operating-system clutter
+Thumbs.db
+desktop.ini
+.DS_Store
