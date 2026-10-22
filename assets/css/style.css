@@ -1369,8 +1369,10 @@ footer[id] {
 }
 
 .principal__toggle {
-  margin-top: 18px;
+  display: flex;
+  width: fit-content;
   min-width: 140px;
+  margin: 18px auto 0;
 }
 
 /* ---------- Portrait ---------- */
