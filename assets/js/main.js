@@ -13,8 +13,11 @@
   /** Paste the student LMS address here. While empty, "Connect LMS" shows a "coming soon" notice. */
   var LMS_URL = ''
 
-  /** How long each hero image stays on screen, in milliseconds (8000 = 8 seconds). */
+  /** How long each hero image stays fully on screen, in milliseconds (8000 = 8 seconds). */
   var HERO_INTERVAL = 8000
+
+  /** Length of the fade between hero images (matches the 1.1s in style.css). */
+  var HERO_FADE = 1100
 
   /** Text shown in the "View Classes" popup. */
   var CLASSES = {
@@ -170,7 +173,6 @@
   var heroIndex = 0
   var heroTimer = null
   var heroPaused = false
-  var heroChangedAt = 0
 
   function showHeroSlide(i) {
     var next = (i + heroSlides.length) % heroSlides.length
@@ -188,19 +190,20 @@
     heroSlides[next].removeAttribute('aria-hidden')
 
     heroIndex = next
-    heroChangedAt = Date.now()
     setTimeout(function () {
       prev.classList.remove('was-active')
     }, 1200)
   }
 
-  function scheduleHero() {
+  // Each image stays fully visible for HERO_INTERVAL. After a change, the count
+  // starts once the new image has finished fading in (afterFade = true).
+  function scheduleHero(afterFade) {
     clearTimeout(heroTimer)
     if (heroPaused || document.hidden || heroSlides.length < 2) return
     heroTimer = setTimeout(function () {
       showHeroSlide(heroIndex + 1)
-      scheduleHero()
-    }, HERO_INTERVAL)
+      scheduleHero(true)
+    }, HERO_INTERVAL + (afterFade === true ? HERO_FADE : 0))
   }
 
   function setHeroPaused(paused) {
@@ -213,21 +216,15 @@
   if (heroSlides.length > 1) {
     var hero = $('.hero')
 
-    // Moving the mouse onto the hero shows the next image
-    // (ignored while an image is still fading in, so it doesn't flicker)
-    hero.addEventListener('mouseenter', function () {
-      if (Date.now() - heroChangedAt < 1200) return
-      showHeroSlide(heroIndex + 1)
-      scheduleHero()
-    })
-
     // Hidden button for keyboard users (appears when they press Tab)
     heroPause.addEventListener('click', function () {
       setHeroPaused(!heroPaused)
     })
 
     // Stop while the browser tab is in the background
-    document.addEventListener('visibilitychange', scheduleHero)
+    document.addEventListener('visibilitychange', function () {
+      scheduleHero()
+    })
 
     // Swipe left / right on touch screens
     var heroTouch = null
@@ -247,13 +244,23 @@
         heroTouch = null
         if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
           showHeroSlide(heroIndex + (dx < 0 ? 1 : -1))
-          scheduleHero()
+          scheduleHero(true)
         }
       },
       { passive: true },
     )
 
-    setHeroPaused(heroPaused)
+    // Start the first 8 seconds only once the first image has actually loaded
+    var firstHeroImage = heroSlides[0].querySelector('img')
+    var startHero = function () {
+      setHeroPaused(heroPaused)
+    }
+    if (firstHeroImage && !firstHeroImage.complete) {
+      firstHeroImage.addEventListener('load', startHero, { once: true })
+      firstHeroImage.addEventListener('error', startHero, { once: true })
+    } else {
+      startHero()
+    }
   }
 
   /* ==================================================================
