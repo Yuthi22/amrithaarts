@@ -257,6 +257,52 @@
   }
 
   /* ==================================================================
+     Principal bio: See More / See Less
+     ================================================================== */
+
+  var bio = $('.principal__bio')
+  var bioText = $('#principal-bio-text')
+  var bioToggle = $('.principal__toggle')
+
+  if (bio && bioText && bioToggle) {
+    // Hide the button if the whole bio already fits in the preview
+    var checkBioLength = function () {
+      if (bio.classList.contains('is-expanded')) return
+      bio.classList.remove('is-short')
+      bio.classList.toggle('is-short', bioText.scrollHeight <= bioText.clientHeight + 4)
+    }
+
+    bioToggle.addEventListener('click', function () {
+      var open = !bio.classList.contains('is-expanded')
+      if (open) {
+        // Animate up to the full height, then let it size itself freely
+        bioText.style.maxHeight = bioText.scrollHeight + 'px'
+        bio.classList.add('is-expanded')
+        var done = function (e) {
+          if (e.propertyName !== 'max-height') return
+          bioText.removeEventListener('transitionend', done)
+          if (bio.classList.contains('is-expanded')) bioText.style.maxHeight = 'none'
+        }
+        bioText.addEventListener('transitionend', done)
+      } else {
+        // Animate from the current height back down to the preview
+        bioText.style.maxHeight = bioText.scrollHeight + 'px'
+        void bioText.offsetHeight
+        bio.classList.remove('is-expanded')
+        bioText.style.maxHeight = ''
+        // Keep the button in view after the text folds up
+        var top = bio.getBoundingClientRect().top
+        if (top < 90) window.scrollTo({ top: window.scrollY + top - 110, behavior: 'smooth' })
+      }
+      bioToggle.setAttribute('aria-expanded', String(open))
+      bioToggle.textContent = open ? 'See Less' : 'See More'
+    })
+
+    checkBioLength()
+    window.addEventListener('resize', checkBioLength)
+  }
+
+  /* ==================================================================
      Mobile menu
      ================================================================== */
 
